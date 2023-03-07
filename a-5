@@ -1,0 +1,15 @@
+import pandas as pd
+
+# read the imputed CSV file into a pandas dataframe
+df = pd.read_csv('vaccinations_imputed.csv')
+
+# calculate median daily vaccination numbers by country
+median_vaccinations = df.groupby('country')['daily_vaccinations'].median()
+
+# sort median vaccination numbers in descending order and select top-3
+top_3 = median_vaccinations.sort_values(ascending=False).head(3)
+
+# print the top-3 countries
+print("Top-3 countries with the highest median daily vaccination numbers:")
+for country, median in top_3.items():
+    print(f"{country}: {median}")
